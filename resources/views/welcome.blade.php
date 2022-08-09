@@ -27,9 +27,9 @@
                     <ul>
                         <li><a class="flex" style="font-size: 3vw;" href="">Filters</a>
                         <ul>
-                        <li><a href="/" >All @if($view==-1)♦️@endif </a></li>
-                        <li><a href="/1" >Done @if($view==1)♦️@endif</a></li>
-                        <li><a href="/0" >Active @if($view==0)♦️@endif</a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/" >All @if($view==-1)♦️@endif </a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/1" >Done @if($view==1)♦️@endif</a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/0" >Active @if($view==0)♦️@endif</a></li>
                     </ul>
                     </div>
                 </div>

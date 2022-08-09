@@ -31,7 +31,7 @@ button[name="delete"] {
     float: left;
     position: relative;
 }
-
+.ul li a{background-color: gray;}
 .menu ul li a{
     margin: 0;
     padding: 0 10px;
@@ -40,7 +40,6 @@ button[name="delete"] {
     display: block;
     font-size: 1vw;
 }
-
 
 .menu ul li:hover ul{ display:block;}
 
