@@ -19,4 +19,6 @@ Route::get('/', [ToDoListController::class,'index_f']);
 
 Route::post('/markDone/{id}/{view}',[ToDoListController::class,'markDone'])->name('markDone');
 
+Route::post('/delete/{id}/{view}',[ToDoListController::class,'delete'])->name('delete');
+
 Route::post('/saveItem',[ToDoListController::class,'saveItem'])->name('saveItem');
