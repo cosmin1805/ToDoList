@@ -40,14 +40,23 @@ class ToDoListController extends Controller
     }
 
     //to save the wanted values from the DB
-    public function saveItem(Request $request){
+    public function saveItem(Request $request,$view){
         $newListItem = new ListItem;
         $newListItem ->name=$request->listItem;
         $newListItem ->name=$request->listItem;
         $newListItem ->is_complete = false;
+        $newListItem ->username = "none";
         $newListItem ->save();
 
-        return redirect('/');
+        return redirect("/".$view);
     }
 
+    public function usernameChange($username,$view,$old){
+        DB::update('update list_items set username= ? where username = ?',[$username,$old]);
+        return redirect("/".$view); 
+    }
+    public function taskTake($username,$id,$view){
+        DB::update('update list_items set username= ? where id = ?',[$username,$id]);
+        return redirect("/".$view); 
+    }
 }

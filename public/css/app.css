@@ -7,6 +7,22 @@ button[name="delete"] {
     width: 17px;
     font-size:auto;
 }
+form{
+    color: white;
+}
+.my-list{
+    margin: 0%;
+    height: 100%; 
+    width: 30%;
+    font-size:auto;
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+h2,h3{
+    color: white;
+    text-align: center;
+}
 .menu{
     margin: 0;
     pading: 0;

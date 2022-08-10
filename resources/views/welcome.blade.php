@@ -19,8 +19,11 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="my-list bg-gray-100 dark:bg-gray-900" id="my-list">
+        <form method="POST" action="" id="username" accept-charset="UTF-8">{{csrf_field()}}<h2 id='username-text'>DEFAULT</h2></form>
+            <h3>YOUR TO-DO LIST</h3>
+        </div>
             <div style="color:white;">
-
                 <div>
                     <div id="div1" style="width:fit-content;font-size: 4vw;">TO DO LIST</div>
                     <div class="menu" style="bg-gray-100 dark:bg-gray-900">
@@ -33,11 +36,10 @@
                     </ul>
                     </div>
                 </div>
-
                 @foreach($listItems as $listItem)
                 @if($view==-1 || $listItem->is_complete == $view)
-                <div id="{{$listItem->is_complete}}">
-                    <form method="POST" action="{{route('markDone',['id'=>$listItem->id,'view'=>$view])}}" accept-charset="UTF-8">
+                <div id="{{$listItem->is_complete}}" name="to-do" class="{{$listItem->id}}" title="{{$listItem->username}}">
+                    <form method="POST" action="{{route('markDone',['id'=>$listItem->id,'view'=>$view])}}" accept-charset="UTF-8" style="border: ; border-width: 1 1px;">
                         <button type="button" name="delete" id="{{$listItem->id}}" ></button>
                         Item: {{$listItem->name}}
                         {{csrf_field()}}
@@ -48,10 +50,11 @@
                     </button>
                     </form>
                     <form method="POST" action="{{route('delete',['id'=>$listItem->id,'view'=>$view])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">{{csrf_field()}}</form>
+                    <form method="POST" action="" id="change:{{$listItem->id}}"accept-charset="UTF-8">{{csrf_field()}}</form>
                 </div>
                 @endif
                 @endforeach
-                <form method="POST" action="{{route('saveItem')}}" accept-charset="UTF-8">
+                <form method="POST" action="{{route('saveItem',['view'=>$view])}}" accept-charset="UTF-8">
                     {{csrf_field()}}
                     <label for="listItem">New To do Item</label><br>
                     <input type="text" name="listItem"><br>
@@ -60,6 +63,7 @@
                 <form method="POST" action="" id="delete:list"accept-charset="UTF-8">{{csrf_field()}}</form>
            </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>
 </html>
