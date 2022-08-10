@@ -13,9 +13,8 @@ use App\Http\Controllers\ToDoListController;
 |
 */
 
-Route::get('/{id}', [ToDoListController::class,'index']);
+Route::get('/{id?}', [ToDoListController::class,'index']);
 
-Route::get('/', [ToDoListController::class,'index_f']);
 
 Route::post('/markDone/{id}/{view}',[ToDoListController::class,'markDone'])->name('markDone');
 

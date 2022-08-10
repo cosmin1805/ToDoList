@@ -1,7 +1,7 @@
-- install laravel
-- clone the repo/install it
 - edit .env settings for yor database
-- run insite a bash in the project directory: composer install
+- run insdte a bash in the project directory: composer install
 - then after making sure the database info is alright run: php artisan migrate
 	- if you have a error try this https://stackoverflow.com/questions/42557693/laravel-pdoexception-could-not-find-driver
-- if the migration works run: php artisan serve
+- if the migration works run to start the web server: php artisan serve
+
+- also to delete multyple elements middle click the button on the left and after you have selected everything you just left click anywhere on the page to delete them

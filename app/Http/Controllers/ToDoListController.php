@@ -11,46 +11,20 @@ use Illuminate\Support\Facades\DB;
 class ToDoListController extends Controller
 {
     //
-    public function index($id){
+    public function index($id=-1){
         return view('welcome',['listItems' => ListItem::all()],['view'=>$id]);
-    }
-    public function index_f(){
-        return view('welcome',['listItems' => ListItem::all()],['view'=>-1]);
     }
 
     //to delete the wanted values from the DB
     public function delete($id,$view){
-        error_log($id);
-        //get all positions for the delete
-        $lastPos = 0;
-        $positions = array();
+        $id = rtrim($id, ".");
 
-        while (($lastPos = strpos($id, ",", $lastPos))!== false) {
-            $positions[] = $lastPos;
-            $lastPos = $lastPos + strlen(",");
-        }
-        //delete the postions except the last one
-        $lastv = 0;
-        foreach ($positions as $value) {
-            $new="";
-            for($i=$lastv;$i<$value;$i++)
-            {
-                $new.=$id[$i];
-            }
-            $del_id = intval( $new );
-            DB::delete('delete from list_items where id = ?',[$del_id]);
-            $lastv = $value+1;
-        }
-
-        //delete the last position
-        $new="";
-        for($i=$lastv;$i<strlen($id);$i++)
+        $id_array = explode(",",$id);
+        foreach($id_array as $value)
         {
-            $new.=$id[$i];
+           DB::delete('delete from list_items where id = ?',[$value]); 
         }
-        $del_id = intval( $new );
-        DB::delete('delete from list_items where id = ?',[$del_id]);
-
+        
         return redirect("/".$view);
     }
 
