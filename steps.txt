@@ -1,7 +1,11 @@
 - edit .env settings for yor database
-- run insdte a bash in the project directory: composer install
-- then after making sure the database info is alright run: php artisan migrate
-	- if you have a error try this https://stackoverflow.com/questions/42557693/laravel-pdoexception-could-not-find-driver
-- if the migration works run to start the web server: php artisan serve
+- run inside a bash in the project directory: composer install
+- then after making sure that the database info is correct, run the php artisan migrate
+	- if you encounter an error try this https://stackoverflow.com/questions/42557693/laravel-pdoexception-could-not-find-driver
+- if the migration works, run to start the web server: php artisan serve
 
-- also to delete multyple elements middle click the button on the left and after you have selected everything you just left click anywhere on the page to delete them
+- to delete an item, left click on the button on the left side
+- to delete multiple elements, click the mouse middle button, select what you want to delete, then right click anywhere else on the page 
+- if you want to change the username, right click on the default label
+- in order to determine if someone is working on a specific item, hover over that item; if item is red, than no one is working on it, if the item is green, then if someone is working on it
+- also by right clicking the item you can add it to your list and mark it as you working on it
