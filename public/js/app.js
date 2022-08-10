@@ -2,7 +2,7 @@ var uname = Cookies.get("username")
 if(uname!=undefined)
     document.getElementById("username-text").innerHTML=uname
 else
-    Cookies.set("username","default")
+    Cookies.set("username","DEFAULT")
 var to_dos = document.getElementsByName('to-do')
 
 to_dos.forEach(element=>{
@@ -107,6 +107,8 @@ username.onmousedown=(e)=>{
     {
         var old = Cookies.get("username")
         let person = prompt("Please enter your name:", "");
+        if(person==null || person==undefined || person=="")
+            return
         Cookies.set('username', person)
         let a = document.getElementsByName("to-do")
         document.getElementById('username').action="http://127.0.0.1:8000/usernameChange/"+person+"/"+a[0].id +"/"+old
