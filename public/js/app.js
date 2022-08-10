@@ -1,6 +1,8 @@
 var uname = Cookies.get("username")
 if(uname!=undefined)
     document.getElementById("username-text").innerHTML=uname
+else
+    Cookies.set("username","default")
 var to_dos = document.getElementsByName('to-do')
 
 to_dos.forEach(element=>{
