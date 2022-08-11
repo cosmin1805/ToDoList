@@ -5,7 +5,7 @@
 - if the migration works, run to start the web server: php artisan serve
 
 - to delete an item, left click on the button on the left side
-- to delete multiple elements, click the mouse middle button on the button on the left side, select what you want to delete, then right click anywhere else on the page 
+- to delete multiple elements, click the mouse middle button on the button on the left side, select what you want to delete, then left click anywhere else on the page 
 - if you want to change the username, right click on the default label
 - in order to determine if someone is working on a specific item, hover over that item
 - also by right clicking the item you can add it to your list and mark it as you working on it

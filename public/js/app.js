@@ -26,6 +26,7 @@ to_dos.forEach(element=>{
 var delets = document.getElementsByName('delete')
 var multyple = 0
 var selected = []
+let a = document.getElementsByName("to-do")
 delets.forEach(element => {
    element.onmousedown=(e)=>{
      if(e.button===1)
@@ -65,7 +66,6 @@ document.onmousedown=(e)=>{
         {
             if(confirm("Do you really want to delete this?"))
             {
-                let a = document.getElementsByName("to-do")
                 document.getElementById('delete:list').action="http://127.0.0.1:8000/delete/"+selected+"/"+a[0].id
                 document.getElementById('delete:list').submit()
             }
@@ -83,7 +83,6 @@ to_dos.forEach(element => {
         {
             if(confirm("Do you really want to remove this to your list?"))
             {
-                let a = document.getElementsByName("to-do")
                 document.getElementById('change:'+element.className).action="http://127.0.0.1:8000/taskTake/none/"+element.className+"/"+a[0].id
                 document.getElementById('change:'+element.className).submit()
             }
@@ -92,7 +91,6 @@ to_dos.forEach(element => {
         {
             if(confirm("Do you really want to add this to your list?"))
             {
-                let a = document.getElementsByName("to-do")
                 var name = Cookies.get("username")
                 document.getElementById('change:'+element.className).action="http://127.0.0.1:8000/taskTake/"+name+"/"+element.className+"/"+a[0].id
                 document.getElementById('change:'+element.className).submit()
@@ -110,7 +108,6 @@ username.onmousedown=(e)=>{
         if(person==null || person==undefined || person=="")
             return
         Cookies.set('username', person)
-        let a = document.getElementsByName("to-do")
         document.getElementById('username').action="http://127.0.0.1:8000/usernameChange/"+person+"/"+a[0].id +"/"+old
         document.getElementById('username').submit()
     }
