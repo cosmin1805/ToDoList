@@ -9,11 +9,11 @@ to_dos.forEach(element=>{
     console.log(element)
     if(element.title=="none")
     {
-        element.style.border="solid red"
+        //element.style.border="solid red"
     }
     else
     {
-        element.style.border="solid green"
+        //element.style.border="solid green"
     }
     if(element.title==uname)
     {
@@ -65,8 +65,8 @@ document.onmousedown=(e)=>{
         {
             if(confirm("Do you really want to delete this?"))
             {
-                let a = selected+document.getElementsByName("to-do")
-                document.getElementById('delete:list').action="http://127.0.0.1:8000/delete/"+a[0].id
+                let a = document.getElementsByName("to-do")
+                document.getElementById('delete:list').action="http://127.0.0.1:8000/delete/"+selected+"/"+a[0].id
                 document.getElementById('delete:list').submit()
             }
         }
