@@ -45,10 +45,9 @@ class ToDoListController extends Controller
     public function markDone($id)
     {
         $listItem = ListItem::find($id);
-        if ($listItem->is_complete == 1)
-            $listItem->is_complete = 0;
-        else
-            $listItem->is_complete = 1;
+
+        $listItem->is_complete = !$listItem->is_complete;
+
         $listItem->save();
         return back();
     }
