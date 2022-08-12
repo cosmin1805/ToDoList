@@ -49,8 +49,12 @@
                         @endif
                     </button>
                     </form>
-                    <form method="POST" action="{{route('delete',['id'=>$listItem->id,'view'=>$view])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">{{csrf_field()}}</form>
-                    <form method="POST" action="" id="change:{{$listItem->id}}"accept-charset="UTF-8">{{csrf_field()}}</form>
+                    <form method="POST" action="{{route('delete',['id'=>$listItem->id,'view'=>$view])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">
+                        @csrf
+                    </form>
+                    <form method="POST" action="" id="change:{{$listItem->id}}"accept-charset="UTF-8">
+                        @csrf
+                    </form>
                 </div>
                 @endif
                 @endforeach
