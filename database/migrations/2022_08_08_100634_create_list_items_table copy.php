@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('list_items');
         Schema::create('list_items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('username');
-            $table->boolean('is_complete');
+            $table->string('username')->nullable()->default("none");
+            $table->boolean('is_complete')->default(false);
             $table->timestamps();
         });
     }
