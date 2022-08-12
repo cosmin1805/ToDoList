@@ -19,10 +19,13 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <div class="my-list bg-gray-100 dark:bg-gray-900" id="my-list">
-        <form method="POST" action="" id="username" accept-charset="UTF-8">{{csrf_field()}}<h2 id='username-text'>DEFAULT</h2></form>
-            <h3>YOUR TO-DO LIST</h3>
-        </div>
+            <div class="my-list bg-gray-100 dark:bg-gray-900" id="my-list">
+                <form method="POST" action="" id="username" accept-charset="UTF-8">
+                    @csrf
+                    <h2 id='username-text'>DEFAULT</h2>
+                </form>
+                <h3>YOUR TO-DO LIST</h3>
+            </div>
             <div style="color:white;">
                 <div>
                     <div id="div1" style="width:fit-content;font-size: 4vw;">TO DO LIST</div>
@@ -30,39 +33,68 @@
                     <ul>
                         <li><a class="flex" style="font-size: 3vw;" href="">Filters</a>
                         <ul>
-                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/all" >All @if($filter == 'all')</a></li>♦️@endif </a></li>
-                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/done" >Done @if($filter == 'done')♦️@endif</a></li>
-                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/active" >Active @if($filter == 'active')♦️@endif</a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;">
+                            <a href="/all">
+                                All
+                                @if($filter == 'all')
+                                ♦️
+                                @endif
+                            </a>
+                        </li>
+                        <li style="background-color: gray;position: relative;top: 6px;">
+                            <a href="/done" >
+                                Done
+                                @if($filter == 'done')
+                                ♦️
+                                @endif
+                            </a>
+                        </li>
+                        <li style="background-color: gray;position: relative;top: 6px;">
+                            <a href="/active" >
+                                Active
+                                @if($filter == 'active')
+                                ♦️
+                                @endif
+                            </a>
+                        </li>
                     </ul>
                     </div>
                 </div>
+
                 @foreach($listItems as $listItem)
-                <div id="{{$listItem->is_complete}}" name="to-do" class="{{$listItem->id}}" title="{{$listItem->username}}">
-                    <form method="POST" action="{{route('markDone',['id'=>$listItem->id])}}" accept-charset="UTF-8" style="border: ; border-width: 1 1px;">
-                        @csrf
-                        <button type="button" name="delete" id="{{$listItem->id}}" ></button>
-                        Item: {{$listItem->name}}
-                        <button type="submit">
-                        @if($listItem->is_complete) ✔️
-                        @else ❌
-                        @endif
-                    </button>
-                    </form>
-                    <form method="POST" action="{{route('delete',['id'=>$listItem->id])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">
-                        @csrf
-                    </form>
-                    <form method="POST" action="" id="change:{{$listItem->id}}"accept-charset="UTF-8">
-                        @csrf
-                    </form>
-                </div>
+                    <div id="{{$listItem->is_complete}}" name="to-do" class="{{$listItem->id}}" title="{{$listItem->username}}">
+                        <form method="POST" action="{{route('markDone',['id'=>$listItem->id])}}" accept-charset="UTF-8" style="border: ; border-width: 1 1px;">
+                            @csrf
+                            <button type="button" name="delete" id="{{$listItem->id}}" ></button>
+                            Item: {{ $listItem->name }}
+                            <button type="submit">
+                                @if($listItem->is_complete)
+                                    ✔️
+                                @else
+                                    ❌
+                                @endif
+                            </button>
+                        </form>
+                        <form method="POST" action="{{route('delete',['id'=>$listItem->id])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">
+                            @csrf
+                        </form>
+                        <form method="POST" action="" id="change:{{$listItem->id}}"accept-charset="UTF-8">
+                            @csrf
+                        </form>
+                    </div>
                 @endforeach
+
                 <form method="POST" action="{{route('saveItem')}}" accept-charset="UTF-8">
                     @csrf
                     <label for="listItem">New To do Item</label><br>
                     <input type="text" name="listItem"><br>
                     <button type="submit">Save List</button>
                 </form>
-                <form method="POST" action="" id="delete:list" accept-charset="UTF-8">{{csrf_field()}}</form>
+
+                <form method="POST" action="" id="delete:list" accept-charset="UTF-8">
+                    @csrf
+                </form>
+
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
