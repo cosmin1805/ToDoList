@@ -40,9 +40,9 @@
                 @if($view==-1 || $listItem->is_complete == $view)
                 <div id="{{$listItem->is_complete}}" name="to-do" class="{{$listItem->id}}" title="{{$listItem->username}}">
                     <form method="POST" action="{{route('markDone',['id'=>$listItem->id,'view'=>$view])}}" accept-charset="UTF-8" style="border: ; border-width: 1 1px;">
+                        @csrf
                         <button type="button" name="delete" id="{{$listItem->id}}" ></button>
                         Item: {{$listItem->name}}
-                        {{csrf_field()}}
                         <button type="submit">
                         @if($listItem->is_complete) ✔️
                         @else ❌
