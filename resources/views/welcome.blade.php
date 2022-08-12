@@ -57,13 +57,13 @@
                 </div>
                 @endforeach
                 <form method="POST" action="{{route('saveItem')}}" accept-charset="UTF-8">
-                    {{csrf_field()}}
+                    @csrf
                     <label for="listItem">New To do Item</label><br>
                     <input type="text" name="listItem"><br>
                     <button type="submit">Save List</button>
                 </form>
-                <form method="POST" action="" id="delete:list"accept-charset="UTF-8">{{csrf_field()}}</form>
-           </div>
+                <form method="POST" action="" id="delete:list" accept-charset="UTF-8">{{csrf_field()}}</form>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
         <script src="{{ asset('js/app.js') }}" ></script>

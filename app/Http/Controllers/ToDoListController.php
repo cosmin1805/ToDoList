@@ -56,15 +56,12 @@ class ToDoListController extends Controller
     //to save the wanted values from the DB
     public function saveItem(Request $request)
     {
-        $newListItem = new ListItem;
-        $newListItem->name = $request->listItem;
-        $newListItem->name = $request->listItem;
-        $newListItem->is_complete = false;
-        $newListItem->username = $request->username ?? "none";
-        $newListItem->save();
+        $request->validate([
+            'listItem' => ['required', 'max:25'],
+        ]); // returns an error to the view if validation fails
 
         $newListItem = ListItem::create([
-            'name' => $request->name,
+            'name' => $request->listItem,
             'username' => $request->username ?? "none",
         ]);
 
@@ -73,12 +70,13 @@ class ToDoListController extends Controller
 
     public function usernameChange($username, $old)
     {
-        DB::update('update list_items set username= ? where username = ?', [$username, $old]);
+        ListItem::where(['username' => $old])->update(['username' => $username]);
         return back();
     }
     public function taskTake($username, $id)
     {
-        DB::update('update list_items set username= ? where id = ?', [$username, $id]);
+        ListItem::find($id)->update(['username' => $username]);
+
         return back();
     }
 }
