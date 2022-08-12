@@ -13,14 +13,14 @@ use App\Http\Controllers\ToDoListController;
 |
 */
 
-Route::get('/{id?}', [ToDoListController::class,'index']);
+Route::get('/{filter}', [ToDoListController::class,'index']);
 
-Route::post('/usernameChange/{username}/{view}/{old}',[ToDoListController::class,'usernameChange'])->name('usernameChange');
+Route::post('/usernameChange/{username}/{old}',[ToDoListController::class,'usernameChange'])->name('usernameChange');
 
-Route::post('/taskTake/{username}/{id}/{view}',[ToDoListController::class,'taskTake'])->name('taskTake');
+Route::post('/taskTake/{username}/{id}',[ToDoListController::class,'taskTake'])->name('taskTake');
 
-Route::post('/markDone/{id}/{view}',[ToDoListController::class,'markDone'])->name('markDone');
+Route::post('/markDone/{id}',[ToDoListController::class,'markDone'])->name('markDone');
 
-Route::post('/delete/{id}/{view}',[ToDoListController::class,'delete'])->name('delete');
+Route::post('/delete/{id}',[ToDoListController::class,'delete'])->name('delete');
 
-Route::post('/saveItem/{view}',[ToDoListController::class,'saveItem'])->name('saveItem');
+Route::post('/saveItem',[ToDoListController::class,'saveItem'])->name('saveItem');

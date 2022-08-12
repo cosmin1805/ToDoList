@@ -30,16 +30,15 @@
                     <ul>
                         <li><a class="flex" style="font-size: 3vw;" href="">Filters</a>
                         <ul>
-                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/" >All @if($view==-1)♦️@endif </a></li>
-                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/1" >Done @if($view==1)♦️@endif</a></li>
-                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/0" >Active @if($view==0)♦️@endif</a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/all" >All @if($filter == 'all')</a></li>♦️@endif </a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/done" >Done @if($filter == 'done')♦️@endif</a></li>
+                        <li style="background-color: gray;position: relative;top: 6px;"><a href="/active" >Active @if($filter == 'active')♦️@endif</a></li>
                     </ul>
                     </div>
                 </div>
                 @foreach($listItems as $listItem)
-                @if($view==-1 || $listItem->is_complete == $view)
                 <div id="{{$listItem->is_complete}}" name="to-do" class="{{$listItem->id}}" title="{{$listItem->username}}">
-                    <form method="POST" action="{{route('markDone',['id'=>$listItem->id,'view'=>$view])}}" accept-charset="UTF-8" style="border: ; border-width: 1 1px;">
+                    <form method="POST" action="{{route('markDone',['id'=>$listItem->id])}}" accept-charset="UTF-8" style="border: ; border-width: 1 1px;">
                         @csrf
                         <button type="button" name="delete" id="{{$listItem->id}}" ></button>
                         Item: {{$listItem->name}}
@@ -49,16 +48,15 @@
                         @endif
                     </button>
                     </form>
-                    <form method="POST" action="{{route('delete',['id'=>$listItem->id,'view'=>$view])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">
+                    <form method="POST" action="{{route('delete',['id'=>$listItem->id])}}" id="delete:{{$listItem->id}}"accept-charset="UTF-8">
                         @csrf
                     </form>
                     <form method="POST" action="" id="change:{{$listItem->id}}"accept-charset="UTF-8">
                         @csrf
                     </form>
                 </div>
-                @endif
                 @endforeach
-                <form method="POST" action="{{route('saveItem',['view'=>$view])}}" accept-charset="UTF-8">
+                <form method="POST" action="{{route('saveItem')}}" accept-charset="UTF-8">
                     {{csrf_field()}}
                     <label for="listItem">New To do Item</label><br>
                     <input type="text" name="listItem"><br>

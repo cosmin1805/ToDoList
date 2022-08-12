@@ -11,26 +11,38 @@ use Illuminate\Support\Facades\DB;
 class ToDoListController extends Controller
 {
     //
-    public function index($id = -1)
+    public function index($filter = 'all')
     {
-        return view('welcome', ['listItems' => ListItem::all()], ['view' => $id]);
+
+        switch ($filter) {
+            case 'done':
+                $listItems = ListItem::where(['is_complete' => true])->get();
+                break;
+            case 'active':
+                $listItems = ListItem::where(['is_complete' => false])->get();
+                break;
+            default:
+                $listItems = ListItem::all();
+        }
+        // dd($filter, $listItems);
+        return view('welcome', ['listItems' => $listItems, 'filter' => $filter]);
     }
 
     //to delete the wanted values from the DB
-    public function delete($id, $view)
+    public function delete($id)
     {
         $id = rtrim($id, ".");
 
         $id_array = explode(",", $id);
         foreach ($id_array as $value) {
-            DB::delete('delete from list_items where id = ?', [$value]);
+            ListItem::find($id)->delete() ?? null;
         }
 
-        return redirect("/" . $view);
+        return back();
     }
 
     //to mark as done the wanted values from the DB
-    public function markDone($id, $view)
+    public function markDone($id)
     {
         $listItem = ListItem::find($id);
         if ($listItem->is_complete == 1)
@@ -38,11 +50,11 @@ class ToDoListController extends Controller
         else
             $listItem->is_complete = 1;
         $listItem->save();
-        return redirect("/" . $view);
+        return back();
     }
 
     //to save the wanted values from the DB
-    public function saveItem(Request $request, $view)
+    public function saveItem(Request $request)
     {
         $newListItem = new ListItem;
         $newListItem->name = $request->listItem;
@@ -51,17 +63,22 @@ class ToDoListController extends Controller
         $newListItem->username = $request->username ?? "none";
         $newListItem->save();
 
-        return redirect("/" . $view);
+        $newListItem = ListItem::create([
+            'name' => $request->name,
+            'username' => $request->username ?? "none",
+        ]);
+
+        return back();
     }
 
-    public function usernameChange($username, $view, $old)
+    public function usernameChange($username, $old)
     {
         DB::update('update list_items set username= ? where username = ?', [$username, $old]);
-        return redirect("/" . $view);
+        return back();
     }
-    public function taskTake($username, $id, $view)
+    public function taskTake($username, $id)
     {
         DB::update('update list_items set username= ? where id = ?', [$username, $id]);
-        return redirect("/" . $view);
+        return back();
     }
 }
